@@ -1,17 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
 
-
-/*============================
-========register page */
-
-.form-Container{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    height: 70vh;
-    flex-direction:column;
-  
-  }
 *, body {
     font-family: 'Poppins', sans-serif;
     font-weight: 400;

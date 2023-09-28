@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useAuth } from "../../context/auth";
 import { Outlet } from "react-router-dom";
 import axios from "axios";
@@ -9,18 +9,24 @@ export default function PrivteRoute()
     const [auth,setAuth]=useAuth()
 
 //default axios
-axios.defaults.headers.common['Authorization']=auth?.token
-    // useEffect(()=>{
-    //  const authCheck=async()=>{
-    //   const res=await axios.get('/api/v1/auth/user-auth');
-    //   if(res.data.ok)
-    //   {
-    //     setOk(true)
-    //   }else{
-    //     setOk(false)
-    //   }
-    //  };
-    //  if(auth?.token) authCheck()
-    // },[auth?.token])
-    // return ok?<Outlet/>:<Spinner/>;
+// axios.defaults.headers.common['Authorization']=auth?.token
+    useEffect(()=>{
+     const authCheck=async()=>{
+      const res=await axios.get('/api/v1/auth/user-auth',
+      {
+        headers:{
+            "Authorization":auth?.token
+        }
+      }
+      )
+      if(res.data.ok)
+      {
+        setOk(true)
+      }else{
+        setOk(false)
+      }
+     };
+     if(auth?.token) authCheck()
+    },[auth?.token])
+    return ok?<Outlet/>:<Spinner/>;
 } 
